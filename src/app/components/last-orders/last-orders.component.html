@@ -33,165 +33,165 @@
                                         <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt >
+                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 2, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 2, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 3, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 3, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 4, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 4, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 5, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 5, false, product.id)">
                                             </div>
                                         </div>
 
                                         <div *ngIf="getOrderProductData(order, z).score === 4" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 2, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 2, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 3, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 3, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 4, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 4, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 5, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 5, false, product.id)">
                                             </div>
                                         </div>
 
                                         <div *ngIf="getOrderProductData(order, z).score === 3" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt >
+                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 2, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 2, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 3, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 3, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 4, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 4, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 5, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 5, false, product.id)">
                                             </div>
                                         </div>
 
                                         <div *ngIf="getOrderProductData(order, z).score === 2" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt >
+                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 2, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 2, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 3, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 3, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 4, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 4, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 5, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 5, false, product.id)">
                                             </div>
                                         </div>
 
                                         <div *ngIf="getOrderProductData(order, z).score === 1" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 2, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 2, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 3, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 3, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 4, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 4, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
-                                                    class="star" alt>
+                                                    class="star" alt (click)="manageStar(z, 5, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
-                                                    class="star hidden" alt>
+                                                    class="star hidden" alt (click)="manageStar(z, 5, false, product.id)">
                                             </div>
                                         </div>
 
