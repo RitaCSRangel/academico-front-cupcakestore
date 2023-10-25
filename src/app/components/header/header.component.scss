@@ -1,0 +1,103 @@
+a{
+    text-decoration: none;
+}
+
+.header-container {
+    display: flex;
+    width: 50%;
+    position: absolute;
+    top: 2%;
+    left: 25%;
+    justify-content: space-around;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-text {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    word-wrap: break-word;
+    font-family: Poppins;
+
+    &.active {
+        color: #FF902B;
+    }
+
+    &.hidden{
+        display: none;
+    }
+}
+
+.profile {
+    display: flex;
+    gap: 1rem;
+}
+
+.profile-elipse {
+    display: flex;
+    background-color: #FF902B;
+    border-radius: 20px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.25rem;
+}
+
+.search-bar {
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    padding-left: 0.3rem;
+    filter: drop-shadow(0 2mm 2mm rgb(0, 0, 0, 0.2));
+
+}
+
+.searchbar-icon{
+    width: 1.3rem;
+    margin-right: 0.5rem;
+}
+
+input {
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    padding-bottom: 0.2rem;
+    font-size: 12px;
+}
+
+*:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: #929292;
+    font-size: 12px;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.exit{
+    color: #FF902B;
+    font-size: 18px;
+    font-weight: 400;
+    word-wrap: break-word;
+    font-family: Poppins;
+    cursor: pointer;
+}
+
+@media (max-width: 1280px) {
+    .header-container{
+        width: 100%;
+        left: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 375px) {}

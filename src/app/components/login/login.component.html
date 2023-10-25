@@ -1,0 +1,153 @@
+<app-header [currentPage]="'acessar'"></app-header>
+<div class="container">
+    <div class="row">
+
+        <div *ngIf="login">
+            <div class="content login">
+                <div class="access-card">
+                    <div class="access">
+                        <div class="header">
+                            <span class="subtitle">Bem vindo ao <span class="subtitle alt">Café Street</span></span>
+                            <span class="title">Entrar</span>
+                        </div>
+
+                        <div class="body">
+                            <div class="input-container">
+                                <span>E-mail:</span>
+                                <input type="text" placeholder="seuemail@email.com" [(ngModel)]="emailLogin" value="emailLogin">
+                            </div>
+
+                            <div class="input-container">
+                                <span>Senha:</span>
+                                <input type="password" placeholder="Senha" [(ngModel)]="passwordLogin" value="passwordLogin">
+                            </div>
+
+                            <div class="recovery-links">
+                                <button class="link" (click)="changeToEsqueciSenha()">Esqueceu a senha?</button>
+                            </div>
+
+                            <div class="buttons">
+                                <button class="button dark" (click)="changeToCadastro()">CADASTRE-SE</button>
+                                <button class="button orange" (click)="logIn()">LOG IN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="cadastro">
+            <div class="content register">
+                <div class="access-card">
+                    <div class="access">
+                        <div class="header">
+                            <span class="subtitle">Bem vindo ao <span class="subtitle alt">Café Street</span></span>
+                            <span class="title">Cadastro</span>
+                        </div>
+
+                        <div class="body">
+                            <div class="cadastro-body">
+
+                                <div class="left-area">
+                                    <div class="input-container">
+                                        <span>Nome:</span>
+                                        <input type="text" placeholder="Nome" [(ngModel)]="nameRegister" value="nameRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>E-mail:</span>
+                                        <input type="text" placeholder="E-mail" [(ngModel)]="emailRegister" value="emailRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>Telefone:</span>
+                                        <input type="text" placeholder="Telefone" [(ngModel)]="phoneRegister" value="phoneRegister">
+                                    </div>
+    
+                                    <div class="input-container">
+                                        <span>Senha:</span>
+                                        <input type="password" placeholder="Senha" [(ngModel)]="passwordRegister" value="passwordRegister">
+                                    </div>
+                                </div>
+    
+                                <div class="rigth-area">
+                                    <div class="input-container">
+                                        <span>Rua:</span>
+                                        <input type="text" placeholder="Rua" [(ngModel)]="ruaRegister" value="ruaRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>Número:</span>
+                                        <input type="text" placeholder="Número" [(ngModel)]="numeroRegister" value="numeroRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>Bairro:</span>
+                                        <input type="text" placeholder="Bairro" [(ngModel)]="bairroRegister" value="bairroRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>Cidade:</span>
+                                        <input type="text" placeholder="Cidade" [(ngModel)]="cidadeRegister" value="cidadeRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>Estado:</span>
+                                        <input type="text" placeholder="Estado" [(ngModel)]="estadoRegister" value="estadoRegister">
+                                    </div>
+        
+                                    <div class="input-container">
+                                        <span>CEP:</span>
+                                        <input type="text" placeholder="Bairro" [(ngModel)]="cepRegister" value="cepRegister">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="buttons">
+                                <button class="button orange" (click)="register()">CADASTRAR</button>
+                                <button class="button dark" (click)="changeToLogin()">LOG IN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="esqueciSenha">
+            <div class="content password">
+                <div class="access-card">
+                    <div class="access">
+                        <div class="header">
+                            <span class="subtitle">Bem vindo ao <span class="subtitle alt">Café Street</span></span>
+                            <span class="title">Esqueci a senha</span>
+                        </div>
+
+                        <div class="body">
+                            <div class="input-container">
+                                <span>E-mail:</span>
+                                <input type="text" placeholder="E-mail" [(ngModel)]="emailRecovery" value="emailRecovery">
+                            </div>
+
+                            <div class="input-container">
+                                <span>Senha nova:</span>
+                                <input type="password" placeholder="Senha" [(ngModel)]="passwordRecovery" value="passwordRecovery">
+                            </div>
+
+                            <div class="input-container">
+                                <span>Repita sua senha nova:</span>
+                                <input type="password" placeholder="Digite a senha novamente" [(ngModel)]="passwordRecoveryConfirmation" value="passwordRecoveryConfirmation">
+                            </div>
+
+
+                            <div class="buttons center">
+                                <button class="button orange" (click)="resetPassword()">ALTERAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

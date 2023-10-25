@@ -1,0 +1,77 @@
+<div class="payment">
+    <div class="pay-container">
+        <div class="pay-content">
+            <div class="pay-header">
+                <span class="pay-title">Finalizar compra</span>
+                <img class="pay-icon-cart" src="../../../../assets/landing-page/cart.svg" alt="">
+            </div>
+            <div class="pay-body">
+                <div class="pay-item" *ngFor="let item of cart">
+                    <div class="pay-item-text">
+                        <span class="pay-text-area">{{item.name}}</span>
+                        <span>{{item.quantity}}</span>
+                        <span>R$ {{item.quantity * item.value}}</span>
+                    </div>
+                    <div class="pay-divider"></div>
+                </div>
+                <div class="subtotal" *ngIf="cart.length">Total: R$ {{totalValue}}</div>
+            </div>
+            <div class="pay-header">
+                <span class="pay-title">Pagamento</span>
+            </div>
+            <div class="pay-divider"></div>
+
+            <div class="pay-buttons">
+                <button class="pay-button" [disabled]="isPix" (click)="payWithPix()">PIX</button>
+                <button class="pay-button" [disabled]="isCard" (click)="payWithCard()">CARTÃO DE CRÉDITO</button>
+            </div>
+
+            <div class="pix-payment" *ngIf="isPix">
+                <qr-code value="O QR Code funcionou! Mas infelizmente esse projeto é apenas um projeto acadêmico e não uma versão çive para que a 
+                API de pedidos possa ser chamada. Por isso, seu pedido infelizmente não foi registrado. Use a opção de cartão de crédito do 
+                site para ver o fluxo de pedidos." size="300" errorCorrectionLevel="M" (click)="createNewOrder()"></qr-code>
+                <span class="note">Este QR Code não faz qualquer cobrança, não leia com seu aplicativo bancário, use um
+                    leitor de qr code comum. Para testar o fluxo de pedidos, utilize a opção de cartão de crédito.</span>
+            </div>
+
+            <div class="card-payment" *ngIf="isCard">
+                <div class="card-form">
+
+                    <div class="two-inputs">
+                        <div class="input-container left">
+                            <span class="card-label">Número do Cartão</span>
+                            <input type="text" placeholder="0000 0000 0000 0000" [(ngModel)]="cardNumber">
+                        </div>
+
+                        <div class="input-container rigth">
+                            <span class="card-label">CVV</span>
+                            <input type="text" placeholder="000" [(ngModel)]="cvv">
+                        </div>
+                    </div>
+
+                    <div class="two-inputs">
+                        <div class="input-container left">
+                            <span class="card-label">Nome do Titular</span>
+                            <input type="text" placeholder="Nome" [(ngModel)]="name">
+                        </div>
+
+                        <div class="input-container rigth">
+                            <span class="card-label">Data de Vencimento</span>
+                            <input type="text" placeholder="00/00/0000" [(ngModel)]="expireDate">
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <span class="card-label">CPF</span>
+                        <input type="text" placeholder="000.000.000-00" [(ngModel)]="cpf">
+                    </div>
+
+                    <button class="pay-button" (click)="createNewOrder()">
+                        <span>Comprar</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

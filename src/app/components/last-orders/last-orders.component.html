@@ -1,0 +1,285 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="content">
+
+            <div class="orders-container" *ngIf="ordersAndProducts.length">
+                <span class="order-title">Últimos pedidos</span>
+                <div class="divider expanded"></div>
+                <div class="orders">
+                    <div class="order" *ngFor="let order of ordersAndProducts; let i = index">
+
+                        <div class="mini-order" id="mini-{{i}}">
+                            <div class="spaced-data" (click)="openCloseInfos(i)">
+                                <span class="order-text mini">Pedido nº 000{{order.order.id}}</span>
+                                <span class="order-text mini">{{order.order.status | titlecase}}</span>
+                                <span class="order-text mini">Total: R$ {{order.order.value}}</span>
+                            </div>
+                            <div class="divider mini"></div>
+                        </div>
+
+                        <div class="expanded-order hidden" id="expanded-{{i}}">
+                            <div class="body-data">
+                                <div class="item" *ngFor="let product of getProductData(order); let z = index">
+                                    <div class="spaced-data">
+                                        <span class="order-text expanded label">{{product.name}}</span>
+                                        <span class="order-text expanded label center-text">{{getOrderProductData(order,
+                                            z).quantity}}</span>
+                                        <span class="order-text expanded label end-text">R$ {{product.value}}</span>
+                                    </div>
+                                    <div
+                                        *ngIf="order.order.status === 'entregue' && user.admin === false">
+                                        <div *ngIf="getOrderProductData(order, z).score === 5" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star" alt >
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="getOrderProductData(order, z).score === 4" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="getOrderProductData(order, z).score === 3" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star" alt >
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="getOrderProductData(order, z).score === 2" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star" alt >
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="getOrderProductData(order, z).score === 1" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star hidden" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star" alt>
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star hidden" alt>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                    class="star" alt
+                                                    (click)="manageStar(z, 1, true, product.id)">
+                                                <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                    class="star hidden" alt (click)="manageStar(z, 1, false, product.id)">
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                    class="star" alt
+                                                    (click)="manageStar(z, 2, true, product.id)">
+                                                <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                    class="star hidden" alt (click)="manageStar(z, 2, false, product.id)">
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                    class="star" alt
+                                                    (click)="manageStar(z, 3, true, product.id)">
+                                                <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                    class="star hidden" alt (click)="manageStar(z, 3, false, product.id)">
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                    class="star" alt (click)="manageStar(z, 4, true, product.id)">
+                                                <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                    class="star hidden" alt
+                                                    (click)="manageStar(z, 4, false, product.id)">
+                                            </div>
+                                            <div>
+                                                <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                    class="star" alt (click)="manageStar(z, 5, true, product.id)">
+                                                <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                    class="star hidden" alt
+                                                    (click)="manageStar(z, 5, false, product.id)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="divider expanded"></div>
+                                </div>
+                            </div>
+                            <div class="pipeline" *ngIf="user.admin === false">
+                                <div *ngIf="order.order.status === 'recebido'">
+                                    <img src="../../../assets/last-orders/pipeline1.png" alt>
+                                </div>
+                                <div *ngIf="order.order.status === 'embalado'">
+                                    <img src="../../../assets/last-orders/pipeline2.png" alt>
+                                </div>
+                                <div *ngIf="order.order.status === 'enviado'">
+                                    <img src="../../../assets/last-orders/pipeline3.png" alt>
+                                </div>
+                                <div *ngIf="order.order.status === 'entregue'">
+                                    <img src="../../../assets/last-orders/pipeline4.png" alt>
+                                </div>
+                            </div>
+                            <div class="pipeline" *ngIf="user.admin === true">
+                                <label class="input-label" for="pipeline">Status do pedido:</label>
+                                <select #pipelineSelect name="pipeline" id="pipeline"
+                                    (change)="changeOrderStatus(pipelineSelect.value, order.order.value, order.order.userId, order.id)">
+                                    <option value="recebido" [selected]="order.order.status === 'recebido'">Recebido
+                                    </option>
+                                    <option value="embalado" [selected]="order.order.status === 'embalado'">Embalado
+                                    </option>
+                                    <option value="enviado" [selected]="order.order.status === 'enviado'">Enviado
+                                    </option>
+                                    <option value="entregue" [selected]="order.order.status === 'entregue'">Entregue
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="button-area" *ngIf="user.admin === false && order.order.status === 'entregue'">
+                                <button class="button orange" (click)="submitStars(order)">Avaliar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!ordersAndProducts.length">
+                <div class="connection-error">
+                    <span class="banner-title">Não há pedidos na lista neste momento.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

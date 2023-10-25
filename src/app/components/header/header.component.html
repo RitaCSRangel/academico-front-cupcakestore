@@ -1,0 +1,23 @@
+<div class="header-container">
+    <div class="logo">
+        <img src="../../../assets/landing-page/logo_coffe.svg" alt="">
+    </div>
+    <div class="nav">
+        <a id="inicio" class="nav-text" href="#">Início</a>
+        <a id="cardapio"class="nav-text" href="/cardapio">Cardápio</a>
+        <a *ngIf="!logged" id="acessar" class="nav-text" href="/acesso">Acessar</a>
+    </div>
+    <div class="profile">
+        <div *ngIf="logged" class="profile-image">
+            <a class="profile-elipse" href="/perfil">
+                <img src="../../../assets/landing-page/fluent_person-32-regular.svg" alt="">
+            </a>
+        </div>
+        <div (click)="open()">
+            <img src="../../../assets/landing-page/cart-orange.svg" alt="">
+        </div>
+        <div *ngIf="logged">
+            <span class="exit" (click)="loggout()">Sair</span>
+        </div>
+    </div>
+</div>

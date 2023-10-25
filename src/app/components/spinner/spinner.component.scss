@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:400,700,300);
+
+*,html{margin:0;padding:0}
+
+//variables
+$fontColor : #FF902A;
+
+.overlay{
+  display: flex;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  height:100%;
+  width:100%;
+  background-color: rgba(255, 145, 41, 0.1411764706);
+  align-items: center;
+  justify-content: center;
+}
+
+svg{
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display:inline-block;
+}

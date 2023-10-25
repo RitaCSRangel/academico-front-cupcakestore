@@ -1,0 +1,189 @@
+<app-header [currentPage]="'landing-page'"></app-header>
+
+<div class="container">
+    <div class="row">
+
+        <div class="banner">
+
+            <div class="hero">
+
+                <div class="content-hero">
+                    <span class="banner-title">
+                        Aproveite seu
+                        <span class="banner-title alt">café</span>
+                        e não esqueça o seu delicioso
+                        <span class="banner-title alt">cupcake!</span>
+                    </span>
+                    <span class="banner-subtitle">
+                        Aumente sua produtividade e melhore seu humor com uma xícara de café e um docinho pela manhã
+                    </span>
+
+                    <a class="filled-button" href="/cardapio">
+                        Peça já o seu!
+                    </a>
+                </div>
+
+                <div class="content-hero">
+                    <div class="bubbles">
+
+                        <div class="bubble-card position1">
+                            <div class="bubble">
+                                <span>Cappucinos</span>
+                                <img src="../../../assets/landing-page/star.svg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="bubble-card position2">
+                            <div class="bubble">
+                                <span>Cafés</span>
+                                <img src="../../../assets/landing-page/star.svg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="bubble-card position3">
+                            <div class="bubble">
+                                <span>Cupcakes</span>
+                                <img src="../../../assets/landing-page/star.svg" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="hero-elipse-container">
+                        <div class="hero-elipse">
+                            <div class="hero-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="popular-items">
+
+            <div class="popular-text">
+                <span>Popular <span class="popular-text alt">hoje</span></span>
+            </div>
+
+            <div *ngIf="products.length">
+                <div class="cards">
+                    <div class="card" *ngFor="let item of products | slice : 0 : 3; let i = index">
+                        <div class="card-content">
+                            <div>
+                                <img class="card-image" src="../../../assets/{{item.type}}s/{{item.image}}" alt="">
+                                <div class="card-nota">
+                                    <div class="nota">
+                                        <span>{{item.score.toFixed(1)}}</span>
+                                        <img src="../../../assets/landing-page/star.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-description">
+                                <div class="card-h">
+                                    <span class="card-title" title="{{item.name}}">{{item.name}}</span>
+                                    <span class="card-title">R$ {{item.value.toString()}}</span>
+                                </div>
+    
+                                <div class="button-position">
+    
+                                    <div class="card-button-area" *ngIf="!logged">
+                                        <div class="card-button left inactive" (click)="showAlert(i.toString())"
+                                            id="cardbutton-{{i}}">
+                                            +
+                                        </div>
+                                        <div class="card-button-middle">
+                                            <span>{{item.quantity}}</span>
+                                        </div>
+                                        <div class="card-button rigth inactive" (click)="showAlert(i.toString())"
+                                            id="cardbutton-{{i}}">
+                                            -
+                                        </div>
+                                    </div>
+    
+                                    <div class="card-button-area" *ngIf="logged">
+                                        <div class="card-button left active" (click)="addRemoveToCart(item.id, 'add')"
+                                            id="cardbutton-{{i}}">
+                                            +
+                                        </div>
+                                        <div class="card-button-middle">
+                                            <span>{{item.quantity}}</span>
+                                        </div>
+                                        <div class="card-button rigth active" (click)="addRemoveToCart(item.id, 'rem')"
+                                            id="cardbutton-{{i}}">
+                                            -
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+    
+                        <div class="loginAlert invisible" id="cardalert-{{i}}">
+                            <span class="alert-text">Acesse sua conta para pedir.</span>
+                            <a class="alert-text attention" href="/acesso">Clique aqui!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!products.length">
+                <div class="connection-error">
+                    <span class="banner-title">Eita! Parece que os cafés <br>não estão para cupcakes hoje.</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <div class="delivery-info">
+
+                <div class="delivery-text">
+                    <span>Como usar o sistema de <span class="delivery-text alt">entregas</span></span>
+                </div>
+
+                <div class="delivery-desc">
+
+                    <div class="delivery-path">
+                        <img class="delivery-image" src="../../../assets/landing-page/coffe-tap.png" alt="">
+                        <span class="delivery-title">Escolha seu café</span>
+                        <span class="delivery-subtitle">Escolha alguns dos 20+ cafés pra você</span>
+                    </div>
+
+                    <div class="delivery-path">
+                        <img class="delivery-image" src="../../../assets/landing-page/food-truck.png" alt="">
+                        <span class="delivery-title">Nós entregamos na sua casa</span>
+                        <span class="delivery-subtitle">Escolha o seu e peça um delivery</span>
+                    </div>
+
+                    <div class="delivery-path">
+                        <img class="delivery-image" src="../../../assets/landing-page/coffee-cup-only.png" alt="">
+                        <span class="delivery-title">Aproveite seu café</span>
+                        <span class="delivery-subtitle">No conforto do lar</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="about-us">
+                <div class="about-us-card">
+                    <div class="about-us-image">
+                    </div>
+                </div>
+                <div class="about-us-desc">
+                    <div class="about-us-text title">
+                        <span>Sobre <span class="about-us-text title alt">nós</span></span>
+                    </div>
+                    <span class="about-us-text">Oferecemos café e cupcakes de qualidade com uma rápida entrega. </span>
+                    <span class="about-us-subtitle">Somos uma empresa que fabrica e distribui deliciosas
+                        bebidas e cupcakes. Nosso principal produto é feito com uma receita secreta e
+                        está disponível em lojas de todo o mundo. </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
