@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/services/products/product-model';
-import { calculateScore, checkLogin, getCart, setCart, setUser } from 'src/app/utils/utils';
+import { checkLogin, getCart, getSortedCart, setCart, setUser } from 'src/app/utils/utils';
 import { HeaderComponent } from '../header/header.component';
 import { User } from 'src/app/services/users/user-model';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -38,6 +38,9 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
     this.loadLoginFeatures();
+    setTimeout(() => {
+      this.loadProductsFront()
+    }, 2000);
   }
 
   // -------- Métodos da Classe --------
@@ -64,18 +67,16 @@ export class LandingPageComponent implements OnInit {
   loadProducts() {
     this.productsService.getAllProducts().subscribe(
       (response: Product[]) => {
-        this.products = response;
-
-        // Arrumar do maior pro menor score
-        this.products.sort((itemA, itemB) => (itemA.score < itemB.score) ? 1 : (itemA.score > itemB.score) ? -1 : 0);
-
-        // Armazenar na storage session
-        calculateScore(this.products, this.ordersService);
+        setCart(response, this.ordersService)
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+  }
+
+  loadProductsFront(){
+    this.products = getSortedCart();
   }
 
   // Método addRemoveToCart
@@ -101,7 +102,7 @@ export class LandingPageComponent implements OnInit {
         } else {
           return;
         }
-        setCart(this.products);
+        setCart(this.products, this.ordersService);
         break;
       }
     }

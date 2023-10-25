@@ -52,7 +52,8 @@ export class PaymentMethodComponent implements OnInit {
   // Este método é responsável por obter o carrinho armazenado no session storage. Dessa forma seus dados podem ser carregados
   // na lista de itens que o usuário escolheu (são pegos somente os itens que possuem quantity maior que 0)
   loadCart() {
-    let sessionCart = getCart();
+    // Armazenar na storage session
+    const sessionCart = getCart();
     if (sessionCart != null) {
       for (let i = 0; i < sessionCart.length; i++) {
         if (sessionCart[i].quantity > 0) {
@@ -100,38 +101,49 @@ export class PaymentMethodComponent implements OnInit {
       id: 0,
       userId: this.user.id != null ? this.user.id : 0,
       value: this.totalValue,
-      status: 'recebido'
+      status: 'recebido',
+      rated: false
     }
+
+    const found = this.cart.filter((product) => product.quantity > 0).length;
+    let contador = 0;
 
     this.ordersService.addOrder(order).subscribe(
       (response: Order) => {
 
         this.cart.forEach((item) => {
-          const orderProduct: OrderProduct = {
-            id: 0,
-            orderId: response.id != null ? response.id : 0,
-            quantity: item.quantity,
-            productId: item.id != null ? item.id : 0,
-            name: item.name,
-            score: 0
-          }
-          this.ordersService.addOrderProduct(orderProduct).subscribe(
-            (response: OrderProduct) => {
-            },
-            (error: HttpErrorResponse) => {
-              alert(error.message);
+
+          if (item.quantity > 0) {
+            const orderProduct: OrderProduct = {
+              id: 0,
+              orderId: response.id != null ? response.id : 0,
+              quantity: item.quantity,
+              productId: item.id != null ? item.id : 0,
+              name: item.name,
+              score: 5
             }
-          );
+            this.ordersService.addOrderProduct(orderProduct).subscribe(
+              (response: OrderProduct) => {
+                contador++;
+
+                if (found === contador) {
+                  const sessionCart = getCart();
+                  if (sessionCart != null) {
+                    for (let i = 0; i < sessionCart.length; i++) {
+                      sessionCart[i].quantity = 0;
+                    }
+                    setCart(sessionCart, this.ordersService)
+                    this.activeModal.close();
+                    window.location.reload();
+                  }
+                }
+              },
+              (error: HttpErrorResponse) => {
+                alert(error.message);
+              }
+            );
+          }
         })
-
-        let sessionCart = getCart();
-        for (let i = 0; i < sessionCart.length; i++) {
-          sessionCart[i].quantity = 0;
-        }
-        setCart(sessionCart)
-        this.activeModal.close();
-        window.location.reload();
-
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

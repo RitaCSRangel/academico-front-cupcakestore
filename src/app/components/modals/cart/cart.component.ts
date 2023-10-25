@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/services/products/product-model';
 import { getCart } from 'src/app/utils/utils';
 import { PaymentMethodComponent } from '../payment-method/payment-method.component';
+import { OrdersService } from 'src/app/services/orders/orders.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private orderService: OrdersService
   ) { }
 
   ngOnInit(): void {

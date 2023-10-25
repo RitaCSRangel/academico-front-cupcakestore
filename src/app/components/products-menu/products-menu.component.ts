@@ -4,7 +4,7 @@ import { OrdersService } from 'src/app/services/orders/orders.service';
 import { Product } from 'src/app/services/products/product-model';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { User } from 'src/app/services/users/user-model';
-import { calculateScore, checkLogin, getCart, setCart } from 'src/app/utils/utils';
+import { checkLogin, getCart, setCart } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-products-menu',
@@ -47,7 +47,6 @@ export class ProductsMenuComponent implements OnInit {
   ngOnInit(): void {
     this.loadCart();
     this.loadLoginFeatures();
-    calculateScore(this.cart, this.ordersService);
   }
 
   // -------- Métodos da Classe --------
@@ -74,7 +73,8 @@ export class ProductsMenuComponent implements OnInit {
   // como item comprável não é perdida durante todo o uso da sessão.
   loadCart() {
     // Obter o cart do session storage
-    let sessionCart = getCart();
+    // Armazenar na storage session
+    const sessionCart = getCart();
     if (sessionCart != null) {
       const sortedByIdCart = sessionCart.sort(function(a: { id: number; }, b: { id: number; }) { 
         return a.id - b.id;
@@ -103,7 +103,7 @@ export class ProductsMenuComponent implements OnInit {
         } else {
           return;
         }
-        setCart(this.cart);
+        setCart(this.cart, this.ordersService);
         break;
       }
     }
@@ -141,7 +141,7 @@ export class ProductsMenuComponent implements OnInit {
         alert("Produto removido!");
         this.productsService.getAllProducts().subscribe(
           (response: any) => {
-            setCart(response);
+            setCart(response, this.ordersService);
             this.loadCart()
             alert("Carrinho atualizado!");
           },
@@ -174,7 +174,7 @@ export class ProductsMenuComponent implements OnInit {
         alert("Produto adicionado!");
         this.productsService.getAllProducts().subscribe(
           (response: any) => {
-            setCart(response);
+            setCart(response, this.ordersService);
             this.loadCart()
             alert("Carrinho atualizado!");
           },

@@ -326,6 +326,15 @@ button{
     border: none;
 }
 
+button:disabled{
+    background-color: #c9c9c9;
+}
+
+button:enabled{
+    background-color: #FF902A;
+}
+
+
 .button-area{
     display: flex;
     justify-content: flex-end;

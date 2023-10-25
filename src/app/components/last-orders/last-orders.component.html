@@ -30,7 +30,7 @@
                                     </div>
                                     <div
                                         *ngIf="order.order.status === 'entregue' && user.admin === false">
-                                        <div *ngIf="getOrderProductData(order, z).score === 5" class="rating">
+                                        <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
                                                     class="star hidden" alt>
@@ -195,7 +195,7 @@
                                             </div>
                                         </div>
 
-                                        <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
+                                        <div *ngIf="getOrderProductData(order, z).score === 5" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
                                                     class="star" alt
@@ -266,7 +266,7 @@
                                 </select>
                             </div>
                             <div class="button-area" *ngIf="user.admin === false && order.order.status === 'entregue'">
-                                <button class="button orange" (click)="submitStars(order)">Avaliar</button>
+                                <button class="button" (click)="submitStars(order)" [disabled]="order.order.rated">Avaliar</button>
                             </div>
                         </div>
 

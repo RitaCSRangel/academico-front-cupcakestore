@@ -28,8 +28,58 @@ export function getCart() {
   }
 }
 
-export function setCart(products: any){
-    sessionStorage.setItem('cart', JSON.stringify(products));
+export function getSortedCart() {
+  let sessionCart = JSON.parse(sessionStorage.getItem('cart') || '{}')
+  let sortedSessionCart = sessionCart.sort((itemA: { score: number; }, itemB: { score: number; }) => (itemA.score < itemB.score) ? 1 : (itemA.score > itemB.score) ? -1 : 0);
+  if (sortedSessionCart.length > 0) {
+    return sortedSessionCart;
+  } else {
+    return null;
+  }
+}
+
+export function setCart(cart: Product[], ordersService: OrdersService) {
+  ordersService.getAllOrderProducts().subscribe(
+    (response: OrderProduct[]) => {
+      let scoreValues = 5;
+      let scoreQuantities = 1;
+      let index = 0;
+      let newCart: Product[] = [];
+
+      cart.forEach(product => {
+
+        response.forEach((orderProduct) => {
+
+          if (product.id === orderProduct.productId) {
+            scoreValues = scoreValues + orderProduct.score;
+            scoreQuantities++;
+            index = cart.indexOf(product);
+          }
+        });
+
+        let updatedProduct: Product = {
+          id: product.id,
+          name: product.name,
+          value: product.value,
+          type: product.type,
+          quantity: product.quantity,
+          stock: product.stock,
+          score: scoreValues / scoreQuantities,
+          image: product.image
+        }
+
+        newCart.push(updatedProduct);
+        scoreValues = 5;
+        scoreQuantities = 1;
+      });
+
+      sessionStorage.setItem('cart', JSON.stringify(newCart));
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+
 }
 
 export function getUser() {
@@ -41,34 +91,6 @@ export function getUser() {
   }
 }
 
-export function setUser(user: any){
-    sessionStorage.setItem('user', JSON.stringify(user));
-}
-
-
-export function  calculateScore(cart: Product[], ordersService: OrdersService){
-  ordersService.getAllOrderProducts().subscribe(
-    (response: OrderProduct[]) => {
-      let scoreValues = 0;
-      let scoreQuantities = 0;
-      let index = 0;
-
-      cart.forEach(product =>{
-
-         response.forEach((orderProduct) => {
-
-          if (product.id === orderProduct.productId){
-            scoreValues = scoreValues + orderProduct.score;
-            scoreQuantities ++;
-            index = cart.indexOf(product);
-         }
-         });
-      });
-      cart[index].score = scoreValues/scoreQuantities;
-      setCart(cart);
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    }
-  );
+export function setUser(user: any) {
+  sessionStorage.setItem('user', JSON.stringify(user));
 }

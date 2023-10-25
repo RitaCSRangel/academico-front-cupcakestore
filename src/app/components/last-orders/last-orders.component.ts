@@ -37,15 +37,17 @@ export class LastOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
-    this.menuProducts = getCart();
+    // Armazenar na storage session
+    const cart = getCart();
+    if (cart !== null) {
+      this.menuProducts = cart;
+    }
 
     if (this.user.admin === false) {
       this.loadCommonUserOrders();
-      console.log(this.ordersAndProducts)
       this.showContent = true
     } else {
       this.loadAdminUserOrders();
-      console.log(this.ordersAndProducts)
     }
   }
 
@@ -71,7 +73,7 @@ export class LastOrdersComponent implements OnInit {
           // Procura pelos produtos dessa ordem
           this.ordersService.getAllOrderProductsFromOrder(order.id).subscribe(
             (responseOrderProducts: OrderProduct[]) => {
-              
+
               let element: OrderAndProducts = {
                 id: order.id,
                 order: order,
@@ -121,7 +123,7 @@ export class LastOrdersComponent implements OnInit {
           // Procura pelos produtos dessa ordem
           this.ordersService.getAllOrderProductsFromOrder(1).subscribe(
             (responseOrderProducts: OrderProduct[]) => {
-              
+
               let element: OrderAndProducts = {
                 id: order.id,
                 order: order,
@@ -173,6 +175,7 @@ export class LastOrdersComponent implements OnInit {
       userId: userId,
       value: value,
       status: status,
+      rated: false
     }
     this.ordersService.updateOrder(order).subscribe(
       (response: Order) => {
@@ -185,7 +188,7 @@ export class LastOrdersComponent implements OnInit {
   }
 
   // Método manageStar
-  // Este método é disparado ao clicar em alguma estrela e é responsável por verificar se esse produto já recebeu alguma estrela a variável ratings. 
+  // Este método é disparado ao clicar em alguma estrela e é responsável por verificar se esse produto já recebeu alguma estrela na variável ratings. 
   // Caso já tenha recebido uma avaliação, o método removerá esse elemento antigo e substituirá com um novo elemento contendo as novas estrelas que o 
   // usuário atribuiu para o item. Se o método não encontrar uma avaliação prévia para o item, então essa avaliação é simplesmente alocada no ratings.
   // Por fim, o método passa por cada uma das estrelas até chegar na estrela naquela usuário atribuiu para o item, ativando-as ou desativando-as de 
@@ -220,25 +223,167 @@ export class LastOrdersComponent implements OnInit {
     }
 
     if (activate === true) {
-      for (let i = 0; i <= star.stars; i++) {
-        document.getElementById(`star-${i}-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-${i}-${star.listIndex}-on`)?.classList.add('visible');
+      if (starNumber === 1) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
+      } else if (starNumber === 2) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
 
-        document.getElementById(`star-${i}-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-${i}-${star.listIndex}-off`)?.classList.add('hidden');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
+      } else if (starNumber === 3) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
+      } else if (starNumber === 4) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('hidden');
+      } else if (starNumber === 5) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('hidden');
+
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('visible');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('hidden');
+      } else {
+        console.log('Estrela não encontrada');
       }
 
     } else {
-      for (let i = starNumber; i <= star.stars; i++) {
-        console.log(i)
-        document.getElementById(`star-${i+1}-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-${i+1}-${star.listIndex}-on`)?.classList.add('hidden');
 
-        document.getElementById(`star-${i+1}-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-${i+1}-${star.listIndex}-off`)?.classList.add('visible');
+      if (starNumber === 1) {
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
+
+      } else if (starNumber === 2) {
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
+      } else if (starNumber === 3) {
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
+      } else if (starNumber === 4) {
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
+
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
+      } else if (starNumber === 5) {
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
+        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
+        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
+      } else {
+        console.log('Estrela não encontrada');
       }
     }
-
   }
 
 
@@ -247,7 +392,10 @@ export class LastOrdersComponent implements OnInit {
   // verificará quais estrelas foram atribuídas ao produto e fará o update do ProductOrder correspondente.
   submitStars(order: OrderAndProducts) {
     let newRating = 0;
+    let contador = 0;
     for (let i = 0; i < order.products.length; i++) {
+      contador++;
+
       const found = this.ratings.find((rating) => rating.productId === order.products[i].id)
       if (found != null) {
         newRating = found?.stars;
@@ -263,26 +411,41 @@ export class LastOrdersComponent implements OnInit {
       }
       this.ordersService.updateOrderProduct(updatedOrderProduct).subscribe(
         (response: OrderProduct) => {
+          if (contador === order.products.length) {
+
+            const updateOrder = {
+              id: order.order.id,
+              userId: order.order.userId,
+              value: order.order.value,
+              status: order.order.status,
+              rated: true
+            }
+
+            this.ordersService.updateOrder(updateOrder).subscribe(
+              (response: Order) => {
+              },
+              (error: HttpErrorResponse) => {
+                alert(error.message);
+              }
+            );
+          }
         },
         (error: HttpErrorResponse) => {
           alert(error.message);
         }
       );
     }
-
-    alert('Avaliação enviada com sucesso!')
-    window.location.reload();
   }
 
-  getOrderData(order: OrderAndProducts){
+  getOrderData(order: OrderAndProducts) {
     return order.order;
   }
 
-  getOrderProductData(order: OrderAndProducts, index: number){
+  getOrderProductData(order: OrderAndProducts, index: number) {
     return order.orderProducts[index];
   }
 
-  getProductData(order: OrderAndProducts){
+  getProductData(order: OrderAndProducts) {
     return order.products
   }
 }

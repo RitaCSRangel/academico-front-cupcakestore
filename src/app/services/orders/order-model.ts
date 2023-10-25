@@ -5,6 +5,7 @@ export interface Order {
     userId: number,
     value: number,
     status: string,
+    rated: boolean
 }
 
 export interface OrderProduct {
