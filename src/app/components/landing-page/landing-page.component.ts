@@ -24,6 +24,7 @@ export class LandingPageComponent implements OnInit {
   // Controladores
   logged = false;
   cartManipulationInProgress = false;
+  loading = true;
 
   // Armazenadores
   products: Product[] = [];
@@ -38,8 +39,10 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
     this.loadLoginFeatures();
+
     setTimeout(() => {
       this.loadProductsFront()
+      this.loading = false;
     }, 2000);
   }
 

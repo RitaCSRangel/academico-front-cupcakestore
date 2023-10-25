@@ -20,6 +20,7 @@ export class PaymentMethodComponent implements OnInit {
   // Controladores
   isPix = false;
   isCard = false;
+  loading = false;
 
   // Inputs
   cardNumber = '';
@@ -97,6 +98,7 @@ export class PaymentMethodComponent implements OnInit {
   // Este método é usado para chamar a API de criar ordem e, uma vez que a ordem é criada, é chamada a
   // API de criar ordem do produto para cada produto adicionado pelo usuário.
   createNewOrder() {
+    this.loading = true;
     const order = {
       id: 0,
       userId: this.user.id != null ? this.user.id : 0,
@@ -125,16 +127,18 @@ export class PaymentMethodComponent implements OnInit {
             this.ordersService.addOrderProduct(orderProduct).subscribe(
               (response: OrderProduct) => {
                 contador++;
-
                 if (found === contador) {
                   const sessionCart = getCart();
                   if (sessionCart != null) {
                     for (let i = 0; i < sessionCart.length; i++) {
                       sessionCart[i].quantity = 0;
                     }
-                    setCart(sessionCart, this.ordersService)
-                    this.activeModal.close();
-                    window.location.reload();
+                    setTimeout(() => {
+                      sessionStorage.setItem('cart', JSON.stringify(sessionCart))
+                      this.activeModal.close();
+                      window.location.reload();
+                      this.loading = false;
+                    }, 2000);
                   }
                 }
               },

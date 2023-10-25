@@ -25,6 +25,7 @@ export class ProductsMenuComponent implements OnInit {
   logged = false;
   isAdmin = false;
   addFormVisible = false;
+  loading = false;
 
   // Armazenadores
   user!: User;
@@ -136,14 +137,17 @@ export class ProductsMenuComponent implements OnInit {
   // Método removeProduct
   // Esse método é responsável por chamar a API de remover produto.
   removeProduct(index: number){
+    this.loading = true;
     this.productsService.deleteProduct(index).subscribe(
       (response: any) => {
-        alert("Produto removido!");
         this.productsService.getAllProducts().subscribe(
           (response: any) => {
             setCart(response, this.ordersService);
             this.loadCart()
-            alert("Carrinho atualizado!");
+            setTimeout(() => {
+              this.loading = false;
+              window.location.reload();
+            }, 2000);
           },
           (error: HttpErrorResponse) => {
             alert("Não foi possível atualizar o cardápio");
@@ -159,6 +163,7 @@ export class ProductsMenuComponent implements OnInit {
   // Método addProduct
   // Esse método é responsável por chamar a API de adicionar produto.
   addProduct(){
+    this.loading = true;
     const product: Product = {
       id: 0,
       name:this.name,
@@ -167,16 +172,18 @@ export class ProductsMenuComponent implements OnInit {
       quantity: 0,
       stock: this.stock,
       score: 5,
-      image: this.image
+      image: this.image !== ""? this.image : "amarelo.jpg"
     }
     this.productsService.addProduct(product).subscribe(
       (response: any) => {
-        alert("Produto adicionado!");
         this.productsService.getAllProducts().subscribe(
           (response: any) => {
             setCart(response, this.ordersService);
             this.loadCart()
-            alert("Carrinho atualizado!");
+            setTimeout(() => {
+              this.loading = false;
+              window.location.reload();
+            }, 2000);
           },
           (error: HttpErrorResponse) => {
             alert("Não foi possível atualizar o cardápio");

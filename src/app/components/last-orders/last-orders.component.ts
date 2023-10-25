@@ -20,6 +20,7 @@ export class LastOrdersComponent implements OnInit {
 
   // Flags
   showContent = false;
+  loading = false;
 
   // Armazenadores
   user!: User;
@@ -200,18 +201,52 @@ export class LastOrdersComponent implements OnInit {
     var star: Star = {
       listIndex: 0,
       productId: 0,
-      stars: 0
+      stars: 0,
+      starImages: [
+        {
+          starNumber: 1,
+          active: false
+        },
+        {
+          starNumber: 2,
+          active: false
+        },
+        {
+          starNumber: 3,
+          active: false
+        },
+        {
+          starNumber: 4,
+          active: false
+        },
+        {
+          starNumber: 5,
+          active: false
+        }
+      ]
     };
 
-    const found = this.ratings.find((rating) => rating.listIndex === itemIndex)
+    const find = this.ratings.find((rating) => rating.productId === productId)
+    const filter = this.ratings.filter((rating) => rating.productId === productId)
 
-    if (found != null) {
+    if (filter.length > 0) {
       let arrayWithoutElement = this.ratings.filter(function (rating) {
-        return rating !== found;
+        return rating !== find;
       });
       star.listIndex = itemIndex;
       star.productId = productId != null ? productId : 0;
       star.stars = starNumber;
+      for(let i = 0; i < starNumber; i++){
+        if(activate === true){
+          star.starImages[i].active = true;
+        }else{
+          if (i < starNumber-1){
+            star.starImages[i].active = true;
+          }else{
+            star.starImages[i].active = false;
+          }
+        }
+       }
       arrayWithoutElement.push(star)
       this.ratings = arrayWithoutElement;
     }
@@ -219,171 +254,26 @@ export class LastOrdersComponent implements OnInit {
       star.listIndex = itemIndex;
       star.productId = productId != null ? productId : 0;
       star.stars = starNumber;
+      for(let i = 0; i < starNumber; i++){
+        if(activate === true){
+          star.starImages[i].active = true;
+        }else{
+          if (i < starNumber-1){
+            star.starImages[i].active = true;
+          }else{
+            star.starImages[i].active = false;
+          }
+        }
+       }
       this.ratings.push(star);
     }
 
-    if (activate === true) {
-      if (starNumber === 1) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
-      } else if (starNumber === 2) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
+    console.log(this.ratings)
+  }
 
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
-      } else if (starNumber === 3) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
-      } else if (starNumber === 4) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('hidden');
-      } else if (starNumber === 5) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('hidden');
-
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('visible');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('hidden');
-      } else {
-        console.log('Estrela não encontrada');
-      }
-
-    } else {
-
-      if (starNumber === 1) {
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-1-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-1-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
-
-      } else if (starNumber === 2) {
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-2-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-2-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
-      } else if (starNumber === 3) {
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-3-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-3-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
-      } else if (starNumber === 4) {
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-4-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-4-${star.listIndex}-off`)?.classList.add('visible');
-
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
-      } else if (starNumber === 5) {
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.remove('visible');
-        document.getElementById(`star-5-${star.listIndex}-on`)?.classList.add('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.remove('hidden');
-        document.getElementById(`star-5-${star.listIndex}-off`)?.classList.add('visible');
-      } else {
-        console.log('Estrela não encontrada');
-      }
-    }
+  getStarStatus(productId: number, starNumber: number){
+    const found = this.ratings.find((rating) => rating.productId === productId);
+    return found?.starImages[starNumber-1].active;
   }
 
 
@@ -391,10 +281,10 @@ export class LastOrdersComponent implements OnInit {
   // Ao terminar de avaliar os itens o usuário pode clicar no boitão de avaliar. Ao fazê-lo, o método passará por cada um dos produtos da ordem e
   // verificará quais estrelas foram atribuídas ao produto e fará o update do ProductOrder correspondente.
   submitStars(order: OrderAndProducts) {
+    this.loading = true;
     let newRating = 0;
     let contador = 0;
     for (let i = 0; i < order.products.length; i++) {
-      contador++;
 
       const found = this.ratings.find((rating) => rating.productId === order.products[i].id)
       if (found != null) {
@@ -411,6 +301,8 @@ export class LastOrdersComponent implements OnInit {
       }
       this.ordersService.updateOrderProduct(updatedOrderProduct).subscribe(
         (response: OrderProduct) => {
+          contador++;
+
           if (contador === order.products.length) {
 
             const updateOrder = {
@@ -423,6 +315,12 @@ export class LastOrdersComponent implements OnInit {
 
             this.ordersService.updateOrder(updateOrder).subscribe(
               (response: Order) => {
+                if(contador === order.products.length){
+                  setTimeout(() => {
+                    window.location.reload();
+                    this.loading = false;
+                  }, 2000);
+                }
               },
               (error: HttpErrorResponse) => {
                 alert(error.message);
@@ -453,5 +351,11 @@ export class LastOrdersComponent implements OnInit {
 interface Star {
   listIndex: number,
   productId: number,
-  stars: number
+  stars: number,
+  starImages: StarImage[]
+}
+
+interface StarImage {
+  starNumber: number,
+  active: boolean
 }

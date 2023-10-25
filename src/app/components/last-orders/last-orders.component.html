@@ -1,3 +1,4 @@
+<app-spinner *ngIf="loading"></app-spinner>
 <app-header></app-header>
 
 <div class="container">
@@ -29,13 +30,43 @@
                                         <span class="order-text expanded label end-text">R$ {{product.value}}</span>
                                     </div>
                                     <div
-                                        *ngIf="order.order.status === 'entregue' && user.admin === false">
-                                        <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
+                                        *ngIf="order.order.status === 'entregue' && user.admin === false && order.order.rated !== true" class="rating">
+                                        <div>
+                                            <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
+                                                class="star" *ngIf="!getStarStatus(product.id, 1)" alt (click)="manageStar(z, 1, true, product.id)">
+                                            <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
+                                                class="star" *ngIf="getStarStatus(product.id, 1)" alt (click)="manageStar(z, 1, false, product.id)">
+                                        </div>
+                                        <div>
+                                            <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
+                                                class="star" *ngIf="!getStarStatus(product.id, 2)" alt (click)="manageStar(z, 2, true, product.id)">
+                                            <img src="../../../assets/last-orders/star.png" id="star-2-{{z}}-on"
+                                                class="star" *ngIf="getStarStatus(product.id, 2)" alt (click)="manageStar(z, 2, false, product.id)">
+                                        </div>
+                                        <div>
+                                            <img src="../../../assets/last-orders/no-star.png" id="star-3-{{z}}-off"
+                                                class="star" *ngIf="!getStarStatus(product.id, 3)" alt (click)="manageStar(z, 3, true, product.id)">
+                                            <img src="../../../assets/last-orders/star.png" id="star-3-{{z}}-on"
+                                                class="star" *ngIf="getStarStatus(product.id, 3)" alt (click)="manageStar(z, 3, false, product.id)">
+                                        </div>
+                                        <div>
+                                            <img src="../../../assets/last-orders/no-star.png" id="star-4-{{z}}-off"
+                                                class="star" *ngIf="!getStarStatus(product.id, 4)" alt (click)="manageStar(z, 4, true, product.id)">
+                                            <img src="../../../assets/last-orders/star.png" id="star-4-{{z}}-on"
+                                                class="star" *ngIf="getStarStatus(product.id, 4)" alt (click)="manageStar(z, 4, false, product.id)">
+                                        </div>
+                                        <div>
+                                            <img src="../../../assets/last-orders/no-star.png" id="star-5-{{z}}-off"
+                                                class="star" *ngIf="!getStarStatus(product.id, 5)" alt (click)="manageStar(z, 5, true, product.id)">
+                                            <img src="../../../assets/last-orders/star.png" id="star-5-{{z}}-on"
+                                                class="star" *ngIf="getStarStatus(product.id, 5)" alt (click)="manageStar(z, 5, false, product.id)">
+                                        </div>
+                                        <!-- <div *ngIf="getOrderProductData(order, z).score === 0" class="rating">
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-1-{{z}}-off"
-                                                    class="star hidden" alt (click)="manageStar(z, 1, true, product.id)">
+                                                    class="star" *ngIf="estrelas[0].active" alt (click)="manageStar(z, 1, true, product.id)">
                                                 <img src="../../../assets/last-orders/star.png" id="star-1-{{z}}-on"
-                                                    class="star" alt (click)="manageStar(z, 1, false, product.id)">
+                                                    class="star" *ngIf="!estrelas[0].active" alt (click)="manageStar(z, 1, false, product.id)">
                                             </div>
                                             <div>
                                                 <img src="../../../assets/last-orders/no-star.png" id="star-2-{{z}}-off"
@@ -231,7 +262,7 @@
                                                     class="star hidden" alt
                                                     (click)="manageStar(z, 5, false, product.id)">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="divider expanded"></div>
@@ -265,8 +296,12 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="button-area" *ngIf="user.admin === false && order.order.status === 'entregue'">
-                                <button class="button" (click)="submitStars(order)" [disabled]="order.order.rated">Avaliar</button>
+                            <div class="button-area" *ngIf="user.admin === false && order.order.status === 'entregue' && order.order.rated !== true">
+                                <button class="button" (click)="submitStars(order)">Avaliar</button>
+                            </div>
+
+                            <div class="button-area" *ngIf="user.admin === false && order.order.status === 'entregue' && order.order.rated === true">
+                                <button class="button" (click)="submitStars(order)" [disabled]="true">Avaliado!</button>
                             </div>
                         </div>
 
